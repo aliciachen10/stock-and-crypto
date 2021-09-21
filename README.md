@@ -34,6 +34,6 @@ Must be interactive
 
 ## Link to Webpage
 
-[Deployed Wepage](https://aliciachen10.github.io/stock-and-crypto-app/)
+[Deployed Wepage](https://aliciachen10.github.io/stock-and-crypto/)
 
-[Github](https://github.com/aliciachen10/stock-and-crypto-app)
+[Github](https://github.com/aliciachen10/stock-and-crypto)
