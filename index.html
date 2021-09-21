@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link href="assets/css/style.css" rel="stylesheet" />
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="assets/jquery-3.6.0.min.js"></script>
+  <title>Coder Finance</title>
+</head>
+
+<body>
+  <!-- Nav-Bar Header -->
+  <header>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="Assets/stock-icon.png" alt="stock icon" class="icon">
+          Coder Finance
+        </a>
+      </div>
+    </nav>
+  </header>
+  <main class="row row-cols-1 row-cols-md-4 g-4">
+    <!-- Stock Search Card -->
+    <div class="col-2">
+      <div class="card stockSearch-card">
+        <div class="card-body" id="stockSearch">
+          <h5 class="card-title">Search for a Stock:</h5>
+          <form>
+            <label class="form-label" for="stock"></label>
+            <input name="stockSymbolForm" id="stockSymbol" type="text" autofocus="true" class="form-input"
+              placeholder="Enter a Stock Symbol...">
+          </form>
+          <button id='stockBtn' type="submit" form="stock-form" value="submit" class="btn">Search</button>
+        </div>
+        <div class="card-body">
+          <h5>Recent Stocks:</h5>
+          <div class="stock-list" id="stock-list">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row col-8">
+      <!--Stock Card-->
+      <div class="col-6">
+        <div class="card stock-card">
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text" id="stock-name">Name:</p>
+            <p class="card-text" id="opening-price">Open Price:</p>
+            <p class="card-text" id="closing-price">Close Price:</p>
+            <!-- <p class="card-text">30 Day High:</p> -->
+            <svg id="stock-svg" width="500" height="400" class="stock-graph"></svg>
+            <!-- <svg width="100%" height="100%"  viewBox="0 0 100 100"></svg> -->
+          </div>
+        </div>
+      </div>
+      <!-- Crypto Card -->
+      <div class="col-6">
+        <div class="card crypto-card">
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p id="crypto-symbol-name" class="card-text">Name:</p>
+            <p id="crypto-open-price" class="card-text">Open Price:</p>
+            <p id="crypto-closing-price" class="card-text">Close Price:</p>
+            <!-- <p class="card-text">30 Day Low:</p>
+                  <p class="card-text">30 Day High:</p> -->
+            <svg id="crypto-svg" width="500" height="400" class="crypto-graph"></svg>
+            <!-- <svg width="100%" height="100%"  viewBox="0 0 100 100"></svg> -->
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card" id="stockInfo">
+          <img src="assets/stocks.jpg" class="card-img-top" alt="stock market" height="300">
+          <div class="card-body">
+            <h5>Top 5 Stock Trading Platforms</h5>
+            <ul>
+              <li><a href="https://www.tdameritrade.com/">TD Ameritrade</a></li>
+              <li><a href="https://www.fidelity.com/">Fidelity</a></li>
+              <li><a href="https://www.schwab.com/">Charles Schwab</a></li>
+              <li><a href="https://www.interactivebrokers.com/">Interactive Brokers</a></li>
+              <li><a href="https://us.etrade.com/">E*Trade</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card" id="cryptoInfo">
+          <img src="assets/crypto.jpg" class="card-img-top" alt="crpto market" height="300">
+          <div class="card-body">
+            <h5>Top 5 Crypto Trading Platforms</h5>
+            <ul>
+              <li><a href="https://www.etoro.com/en-us/">eToro</a></li>
+              <li><a href="https://blockfi.com/">BlockFi</a></li>
+              <li><a href="https://primexbt.com/">PrimeXBT</a></li>
+              <li><a href="https://www.binance.com/en">Binance</a></li>
+              <li><a href="https://www.coinbase.com/">Coinbase</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <!-- Crypto Search Card -->
+      <div class="card cryptoSearch-card">
+        <div class="card-body" id="cryptoSearch">
+          <h5 class="card-title">Search for a Crypto:</h5>
+          <form>
+            <label class="form-label" for="crypto"></label>
+            <input name="cryptoSymbolForm" id="cryptoSymbol" type="text" autofocus="true" class="form-input"
+              placeholder="Enter a crypto symbol..." />
+          </form>
+          <button id='cryptoBtn' type="submit" form="crypto-form" value="submit" class="btn">Search</button>
+        </div>
+        <div class="card-body">
+          <h5>Recent Crypto:</h5>
+          <div class="crypto-list" id="crypto-list">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Error. Either you entered the wrong stock/crypto name, you didn't enter a stock/crypto, or you've run out of API calls. If the latter, wait a minute and try again.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+<footer class="footer">
+  <p id="footer-text"> ©2021 Coder Finance. All Rights Reserved</p>
+</footer>
+
+</html>
