@@ -323,7 +323,7 @@ async function makeMyStockGraph(symbol) {
     .attr('text-anchor', 'middle')
     .style('font-family', 'Helvetica')
     .style('font-size', 12)
-    .text('History');
+    .text('History (Days)');
 
   // Y label
   svg.append('text')
@@ -407,7 +407,7 @@ async function makeMyCryptoGraph(symbol) {
     .attr('text-anchor', 'middle')
     .style('font-family', 'Helvetica')
     .style('font-size', 20)
-    .text('Time vs. Stock Price');
+    .text('Time vs. Crypto Price');
 
   // X label
   svg.append('text')
@@ -416,7 +416,7 @@ async function makeMyCryptoGraph(symbol) {
     .attr('text-anchor', 'middle')
     .style('font-family', 'Helvetica')
     .style('font-size', 12)
-    .text('History');
+    .text('History (Days)');
 
   // Y label
   svg.append('text')
@@ -424,7 +424,7 @@ async function makeMyCryptoGraph(symbol) {
     .attr('transform', 'translate(60,' + height + ')rotate(-90)')
     .style('font-family', 'Helvetica')
     .style('font-size', 12)
-    .text('Stock price');
+    .text('Crypto price');
 
   // Step 6
   g.append("g")
